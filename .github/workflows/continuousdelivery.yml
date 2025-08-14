@@ -9,14 +9,28 @@ jobs:
   deliver:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Simulando Continuous Delivery
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npx eslint .
+
+      - name: Run tests
+        run: npm test
+
+      - name: Package project
+        run: zip -r projetozipado.zip . -x "node_modules/*"
+
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-            name: projetozipado.zip
-            path:
-                main.py
-                README.md
-
+          name: projetozipado
+          path: projetozipado.zip
