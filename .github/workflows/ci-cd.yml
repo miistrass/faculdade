@@ -41,7 +41,7 @@ jobs:
           args: 'The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed.'
 
   testes:
-    runs-on: unbutu-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js
