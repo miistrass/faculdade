@@ -30,6 +30,16 @@ jobs:
       - name: Run Tests
         run: npm test
 
+  discord:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Discord notification
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: Ilshidur/action-discord@master
+        with:
+          args: 'The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed.'
+
   cd:
     name: Continuous Deployment
     runs-on: ubuntu-latest
